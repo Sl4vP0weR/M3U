@@ -11,7 +11,6 @@ namespace M3U
         static void Main(string[] args)
         {
             Console.CursorVisible = false;
-
             if (args.Length < 1)
             {
                 Console.WriteLine("Try add path to M3U file.");
@@ -30,7 +29,7 @@ namespace M3U
                 Directory.CreateDirectory(outPath);
 
             var movPath = Path.Combine(outPath, Path.GetFileName(path));
-            Console.CursorVisible = false;
+            
             try
             {
                 using (var movStream = File.OpenWrite(movPath))
