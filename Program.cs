@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -8,12 +8,19 @@ namespace M3U
 {
     class Program
     {
+        static void WriteLine(object msg, ConsoleColor color = ConsoleColor.White, int x = -1, int y = -1) => Write(msg + "\n", color, x, y);
+        static void Write(object msg, ConsoleColor color = ConsoleColor.White, int x = -1, int y = -1)
+        {
+            Console.SetCursorPosition(x == -1 ? Console.CursorLeft : x, y == -1 ? Console.CursorTop : y);
+            Console.ForegroundColor = color;
+            Console.Write(msg);
+        }
         static void Main(string[] args)
         {
             Console.CursorVisible = false;
             if (args.Length < 1)
             {
-                Console.WriteLine("Try add path to M3U file.");
+                WriteLine("Try add path to M3U file.", ConsoleColor.Gray);
                 Console.ReadKey();
                 return;
             }
@@ -34,24 +41,20 @@ namespace M3U
             {
                 using (var movStream = File.OpenWrite(movPath))
                 {
-                    Console.ForegroundColor = ConsoleColor.Cyan;
-                    Console.WriteLine("Processing...");
-                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    WriteLine("Processing...", ConsoleColor.Cyan);
 
                     var y = Console.CursorTop;
                     var lines = File.ReadAllLines(path).Where(ln => !string.IsNullOrEmpty(ln) && !ln.StartsWith("#")).ToList();
-                    lines.ForEach(url =>
+                    using (var wc = new WebClient())
                     {
-                        using (var wc = new WebClient())
+                        lines.ForEach(url =>
                         {
-                            Console.SetCursorPosition(0, y);
-                            Console.Write(freeStr);
-                            Console.SetCursorPosition(0, y);
-                            Console.Write(url + "...");
+                            Write(freeStr, 0, 0, y);
+                            Write(url + "...", ConsoleColor.Yellow, 0, y);
                             var bytes = wc.DownloadData(url);
                             movStream.Write(bytes, 0, bytes.Length);
-                        }
-                    });
+                        });
+                    }
                 }
             }
             catch (Exception ex)
