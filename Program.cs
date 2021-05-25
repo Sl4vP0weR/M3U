@@ -30,7 +30,7 @@ namespace M3U
 
             string freeStr = "                                                                                                                                                                                                                                                                                                                                                                                 ";
 
-            outPath = outPath ?? Path.Combine(Path.GetDirectoryName(typeof(Program).Assembly.Location), DateTime.Now.ToLocalTime().ToString("dd.MM.yyyy hh mm"));
+            outPath = outPath ?? Path.Combine(Path.GetDirectoryName(typeof(Program).Assembly.Location), DateTime.Now.ToString("dd.MM.yyyy hh mm"));
 
             if (!Directory.Exists(outPath))
                 Directory.CreateDirectory(outPath);
