@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Sl4vP0weR")]
 [assembly: AssemblyProduct("M3U")]
-[assembly: AssemblyCopyright("Copyright © Sl4vP0weR 2020")]
+[assembly: AssemblyCopyright("Copyright © Sl4vP0weR 2021")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
